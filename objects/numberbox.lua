@@ -70,7 +70,14 @@ function newobject:initialize()
 		end
 	end
 	increasebutton.Update = function(object)
-		local time = love.timer.getMicroTime()
+
+		local time = 0
+		if love._version == "0.9.0" then
+			time = love.timer.getTime()
+		else
+			time = love.timer.getMicroTime()
+		end
+
 		local delay = self.delay
 		local down = object.down
 		local canmodify = self.canmodify
@@ -104,7 +111,14 @@ function newobject:initialize()
 		end
 	end
 	decreasesbutton.Update = function(object)
-		local time = love.timer.getMicroTime()
+
+		local time = 0
+		if love._version == "0.9.0" then
+			time = love.timer.getTime()
+		else
+			time = love.timer.getMicroTime()
+		end
+
 		local delay = self.delay
 		local down = object.down
 		local canmodify = self.canmodify

@@ -132,7 +132,14 @@ function newobject:draw()
 	local internals = self.internals
 	local children = self.children
 	local stencilfunc = function() love.graphics.rectangle("fill", x, y, width, height) end
-	local stencil = love.graphics.newStencil(stencilfunc)
+
+	local stencil = nil
+	if love._version == "0.9.0" then
+		stencil = love.graphics.setStencil(stencilfunc)
+	else
+		stencil = love.graphics.newStencil(stencilfunc)
+	end
+
 	local skins = loveframes.skins.available
 	local skinindex = loveframes.config["ACTIVESKIN"]
 	local defaultskin = loveframes.config["DEFAULTSKIN"]

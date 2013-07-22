@@ -264,7 +264,14 @@ function newobject:draw()
 	local skinindex = loveframes.config["ACTIVESKIN"]
 	local defaultskin = loveframes.config["DEFAULTSKIN"]
 	local stencilfunc = function() love.graphics.rectangle("fill", self.x, self.y, self.width, self.height) end
-	local stencil = love.graphics.newStencil(stencilfunc)
+
+	local stencil = nil
+	if love._version == "0.9.0" then
+		stencil = love.graphics.setStencil(stencilfunc)
+	else
+		stencil = love.graphics.newStencil(stencilfunc)
+	end
+
 	local selfskin = self.skin
 	local skin = skins[selfskin] or skins[skinindex]
 	local drawfunc = skin.DrawTextInput or skins[defaultskin].DrawTextInput

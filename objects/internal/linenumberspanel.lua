@@ -91,8 +91,14 @@ function newobject:draw()
 	local draw = self.Draw
 	local drawcount = loveframes.drawcount
 	local stencilfunc = function() love.graphics.rectangle("fill", self.parent.x, self.parent.y, self.width, self.height) end
-	local stencil = love.graphics.newStencil(stencilfunc)
 	
+	local stencil = nil
+	if love._version == "0.9.0" then
+		stencil = love.graphics.setStencil(stencilfunc)
+	else
+		stencil = love.graphics.newStencil(stencilfunc)
+	end
+
 	if self.parent.hbar then
 		stencilfunc = function() love.graphics.rectangle("fill", self.parent.x, self.parent.y, self.width, self.parent.height - 16) end
 	end

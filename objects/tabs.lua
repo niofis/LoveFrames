@@ -125,7 +125,14 @@ function newobject:draw()
 	local internals = self.internals
 	local tabheight = self:GetHeightOfButtons()
 	local stencilfunc = function() love.graphics.rectangle("fill", self.x, self.y, self.width, tabheight) end
-	local stencil = love.graphics.newStencil(stencilfunc)
+
+	local stencil = nil
+	if love._version == "0.9.0" then
+		stencil = love.graphics.setStencil(stencilfunc)
+	else
+		stencil = love.graphics.newStencil(stencilfunc)
+	end
+
 	local internals = self.internals
 	local skins = loveframes.skins.available
 	local skinindex = loveframes.config["ACTIVESKIN"]

@@ -117,7 +117,13 @@ function loveframes.debug.draw()
 	
 	-- outline the object that the mouse is hovering over
 	love.graphics.setColor(255, 204, 51, 255)
-	love.graphics.setLine(2, "smooth")
+
+	if love._version == "0.9.0" then
+		love.graphics.setLineWidth(2)
+		love.graphics.setLineStyle("smooth")
+	else
+		love.graphics.setLine(2, "smooth")
+	end
 	love.graphics.rectangle("line", topcol.x - 1, topcol.y - 1, topcol.width + 2, topcol.height + 2)
 	
 end
